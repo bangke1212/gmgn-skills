@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
 export const metadata: Metadata = {
-  title: "GMGN Dashboard — Meme Coin Scanner",
-  description: "Real-time Solana meme coin analytics powered by DexScreener",
+  title: "GMGN Trenches — Real-time Solana Meme Coin Scanner",
+  description: "Live on-chain meme coin tracking on Solana. New, bonding, and migrated tokens with real-time price, MC, holders, and social data.",
 };
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body>{children}</body>
+      <body className="overflow-hidden h-screen">{children}</body>
     </html>
   );
 }
