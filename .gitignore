@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+keys/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.log
+dist
+
+# OS
+.DS_Store
+
+# Internal / testing (not for public release)
+testing/
+
+# Local Claude Code configs (dev environment only)
+.claude/
+.agents/
+skills-lock.json
