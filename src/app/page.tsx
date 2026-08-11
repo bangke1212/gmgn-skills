@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import { Search, TrendingUp, Zap, RefreshCw, ChevronRight, DollarSign, Activity, Flame, Users, Clock, Fuel, Shield, Sparkles, ArrowUp, ArrowDown, Radio, ExternalLink, X, Send } from "lucide-react";
+import { Search, TrendingUp, Zap, RefreshCw, ChevronRight, DollarSign, Activity, Flame, Users, Clock, Fuel, Shield, Sparkles, ArrowUp, ArrowDown, Radio, ExternalLink, X, Send, Wallet } from "lucide-react";
 import type { GmgnToken } from "@/lib/types";
 
 // --- Number formatters ---
