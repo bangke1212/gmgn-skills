@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Search, TrendingUp, Zap, RefreshCw, ChevronRight, DollarSign, Activity, Flame, Users, Clock, Fuel, Shield, Sparkles, Radio, ExternalLink, X, Send, Wallet, MessageCircle, Globe } from "lucide-react";
 import type { GmgnToken } from "@/lib/types";
+import TokenModal, { ModalToken } from "@/app/components/TokenModal";
 
 // --- Extended token type ---
 interface TokenDisplay extends GmgnToken {
@@ -50,7 +51,7 @@ function TokenRow({ token }: { token: TokenDisplay }) {
   const sparkData = [token.change24h || 0, token.change6h || 0, token.change1h || 0, token.change5m || 0];
   
   return (
-    <div className="group flex items-center gap-1.5 py-2 px-2 hover:bg-white/[0.02] border-b border-[#1a1a20] last:border-0 cursor-pointer transition-colors animate-slide-up text-[11px] leading-tight">
+    <div onClick={() => (window as any).__openModal?.(token)} className="group flex items-center gap-1.5 py-2 px-2 hover:bg-white/[0.02] border-b border-[#1a1a20] last:border-0 cursor-pointer transition-colors animate-slide-up text-[11px] leading-tight">
       {/* Image + Symbol + Name */}
       <div className="w-[105px] shrink-0 flex items-center gap-1.5">
         {token.imageUri ? (
@@ -189,6 +190,7 @@ export default function GmgnTrenches() {
   const [lastUpdate, setLastUpdate] = useState<number>(0);
   const [latency, setLatency] = useState<number>(0);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedToken, setSelectedToken] = useState<ModalToken | null>(null);
 
   const fetchData = useCallback(async () => {
     const start = Date.now();
@@ -208,6 +210,10 @@ export default function GmgnTrenches() {
     return () => clearInterval(interval);
   }, [fetchData]);
 
+    useEffect(() => {
+    (window as any).__openModal = (t: ModalToken) => setSelectedToken(t);
+  }, []);
+  
   const allTokens = [...data.fresh, ...data.bonding, ...data.migrated];
 
   return (
@@ -339,6 +345,10 @@ export default function GmgnTrenches() {
           </div>
         </div>
       </div>
+
+      {selectedToken && (
+        <TokenModal token={selectedToken} onClose={() => setSelectedToken(null)} />
+      )}
     </div>
   );
 }
